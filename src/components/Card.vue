@@ -1,0 +1,70 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+<template>
+  <div class="card">
+    <div
+      class="card__inner"
+      :class="{ 'is-flipped': isFlipped }"
+      v-on:click="onToggleFlipCard()"
+    >
+      <div class="card__face card__face--front">
+        <div class="card-content">Front</div>
+      </div>
+      <div class="card__face card__face--back">
+        <div class="card-content">Back</div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      isFlipped: false,
+    };
+  },
+  methods: {
+    onToggleFlipCard() {
+      this.isFlipped = !this.isFlipped;
+    },
+  },
+};
+</script>
+
+<style lang="css" scoped>
+.card {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  width: 90px;
+  height: 120px;
+}
+
+/* Đóng vai trò cố định vị trí khi quay */
+.card__inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+}
+
+.card__inner.is-flipped {
+  transform: rotateY(-180deg);
+}
+
+.card__face {
+  /* Trước sau như 1 */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.card__face--back {
+  background-color: var(--light);
+  transform: rotateY(-180deg);
+}
+</style>
