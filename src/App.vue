@@ -15,6 +15,9 @@ export default {
   data() {
     return {
       statusMatch: "default",
+      setting: {
+        totalOfBlock: 0,
+      },
     };
   },
   components: {
@@ -24,6 +27,14 @@ export default {
   methods: {
     handleBeforeStart(event) {
       console.log(event);
+      this.setting.totalOfBlock = event.totalOfBlock;
+      const firstCards = Array.from(
+        { length: this.setting.totalOfBlock / 2 },
+        (_, i) => i + 1
+      );
+
+      console.log(`firstCards=`, firstCards);
+
       this.statusMatch = "match";
     },
   },
