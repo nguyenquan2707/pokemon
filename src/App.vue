@@ -4,12 +4,13 @@
     v-if="statusMatch === 'default'"
     @onStart="handleBeforeStart($event)"
   />
-  <interac-screen v-if="statusMatch === 'match'" />
+  <interac-screen v-if="statusMatch === 'match'" :cardsContext="cardsContext" />
 </template>
 
 <script>
 import MainScreen from "./components/MainScreen.vue";
 import InteracScreen from "./components/InteracScreen.vue";
+import { shuffled } from "./utils/arrays";
 export default {
   name: "App",
   data() {
@@ -17,6 +18,8 @@ export default {
       statusMatch: "default",
       setting: {
         totalOfBlock: 0,
+        cardsContext: [],
+        startedAt: null,
       },
     };
   },
@@ -33,7 +36,12 @@ export default {
         (_, i) => i + 1
       );
 
-      console.log(`firstCards=`, firstCards);
+      let secondCards = [...firstCards];
+      let cards = [...firstCards, ...secondCards];
+      this.setting.cardsContext = shuffled(cards);
+      this.setting.startedAt = new Date().getTime;
+
+      console.log(`cardsContext=`, this.setting.cardsContext);
 
       this.statusMatch = "match";
     },
