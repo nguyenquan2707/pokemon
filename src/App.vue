@@ -4,7 +4,10 @@
     v-if="statusMatch === 'default'"
     @onStart="handleBeforeStart($event)"
   />
-  <interac-screen v-if="statusMatch === 'match'" :cardsContext="cardsContext" />
+  <interac-screen
+    v-if="statusMatch === 'match'"
+    :cardsContext="setting.cardsContext"
+  />
 </template>
 
 <script>
