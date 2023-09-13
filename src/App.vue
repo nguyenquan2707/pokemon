@@ -4,6 +4,15 @@
     v-if="statusMatch === 'default'"
     @onStart="handleBeforeStart($event)"
   />
+  <!--Khi bấm vào chọn level, sẽ gửi ra event onStart kèm theo sự kiện -->
+  <!-- Từ sự kiện sẽ truyền vào hàm handleBeforeStart để tính cardsContext -->
+  <!-- Đem cardsContext này vào model interac-screen -->
+  <!-- Giá trị cardsContext là {0: 4, 1: 2, 2: 4, 3: 1, 4: 6, 5: 3, 6: 3, 7: 8, 8: 2, 9: 5, 10: 6, 11: 1, 12: 5, 13: 8, 14: 7, 15: 7} -->
+  <!-- Trong model InteracScreen loop ra tạo card tương ứng -->
+  <!-- Trong model InteracScreen loop ra tạo urmBackImage để tạo hình cho card-->
+  <!--  Trong model InteracScreen gửi data card xuống cho Card model bằng dòng code ':card="card"' -->
+  <!-- Khi bấm vào card, sẽ gửi sự kiện onFlip kèm theo data là card phía trên gửi ngược ra cho InteracScreen và gửi vào hàm rulesCheck -->
+  <!-- Từ hàm rulesCheck sẽ xử lý logic cho game. -->
   <interac-screen
     v-if="statusMatch === 'match'"
     :cardsContext="setting.cardsContext"

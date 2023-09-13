@@ -28,7 +28,13 @@ export default {
     CardFlip,
   },
   methods: {
-    rulesCheck()
+    //Gía trị nhận card này là từ bên Card model gửi ra.
+    rulesCheck(card) {
+      console.log(card);
+      //match, Từ rules arrays
+      if (this.rules.length === 2) return false;
+      //not match
+    },
   },
 };
 </script>

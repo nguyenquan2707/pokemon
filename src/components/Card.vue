@@ -28,7 +28,7 @@ export default {
       require: true,
     },
     card: {
-      type: [String],
+      type: [String, Number],
     },
   },
   data() {
@@ -37,6 +37,7 @@ export default {
     };
   },
   methods: {
+    //Khi click vào card, thì card sẽ gửi ra ngoài 1 sự kiện, kèm theo giá trị card, card này define ở props.
     onToggleFlipCard() {
       this.isFlipped = !this.isFlipped;
       if (this.isFlipped) {
