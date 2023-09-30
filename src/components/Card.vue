@@ -28,7 +28,7 @@ export default {
       require: true,
     },
     card: {
-      type: [String, Number],
+      type: [String, Number, Array, Object],
     },
   },
   data() {
