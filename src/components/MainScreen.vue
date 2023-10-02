@@ -2,12 +2,12 @@
   <div class="screen">
     <h1>POKE memories</h1>
     <h3>Select to start the game</h3>
-    <div class="action">
+    <div class="actions">
       <button v-on:click="onStart(16)">
         <span>4x4</span>
         <span>Easy</span>
       </button>
-      <button v-on:click="onStart(32)">
+      <button v-on:click="onStart(36)">
         <span>6x6</span>
         <span>Normal</span>
       </button>
@@ -16,8 +16,8 @@
         <span>Hard</span>
       </button>
       <button v-on:click="onStart(100)">
-        <span>10X10</span>
-        <span>Super Hard</span>
+        <span>10x10</span>
+        <span>Very Hard</span>
       </button>
     </div>
   </div>
@@ -25,9 +25,8 @@
 <script>
 export default {
   methods: {
-    onStart(totalOfBlock) {
-      console.log("heere", totalOfBlock);
-      this.$emit("onStart", { totalOfBlock });
+    onStart(totalOfBlocks) {
+      this.$emit("onStart", { totalOfBlocks });
     },
   },
 };

@@ -1,11 +1,31 @@
 <template>
-  <h1>hi...</h1>
+  <main-screen
+    v-if="statusMatch === 'default'"
+    @onStart="onHandleBeforeStart($event)"
+  />
+  <interac-screen v-if="statusMatch === 'match'" />
 </template>
 
 <script>
+import MainScreen from "./components/MainScreen.vue";
+import InteracScreen from "./components/InteracScreen.vue";
 export default {
   name: "App",
-  components: {},
+  data() {
+    return {
+      statusMatch: "default",
+    };
+  },
+  components: {
+    MainScreen,
+    InteracScreen,
+  },
+  methods: {
+    onHandleBeforeStart(event) {
+      console.log(event);
+      this.statusMatch = "match";
+    },
+  },
 };
 </script>
 
