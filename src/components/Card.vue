@@ -4,45 +4,27 @@
     <div
       class="card__inner"
       :class="{ 'is-flipped': isFlipped }"
-      v-on:click="onToggleFlipCard()"
+      @click="onToggleFlipCard"
     >
       <div class="card__face card__face--front">
-        <div class="card-content"></div>
+        <div class="card__content"></div>
       </div>
       <div class="card__face card__face--back">
-        <div
-          class="card-content"
-          :style="{
-            backgroundImage: `url(${require('@/assets/' + urmBackImage)})`,
-          }"
-        ></div>
+        <div class="card__content">Back</div>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: {
-    urmBackImage: {
-      type: String,
-      require: true,
-    },
-    card: {
-      type: [String, Number, Array, Object],
-    },
-  },
   data() {
     return {
       isFlipped: false,
     };
   },
   methods: {
-    //Khi click vào card, thì card sẽ gửi ra ngoài 1 sự kiện, kèm theo giá trị card, card này define ở props.
     onToggleFlipCard() {
       this.isFlipped = !this.isFlipped;
-      if (this.isFlipped) {
-        this.$emit("onFlip", this.card);
-      }
     },
   },
 };
@@ -52,12 +34,10 @@ export default {
 .card {
   display: inline-block;
   margin-right: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 1rem;
   width: 90px;
   height: 120px;
 }
-
-/* Đóng vai trò cố định vị trí khi quay */
 .card__inner {
   width: 100%;
   height: 100%;
@@ -66,36 +46,29 @@ export default {
   cursor: pointer;
   position: relative;
 }
-
 .card__inner.is-flipped {
   transform: rotateY(-180deg);
 }
 
 .card__face {
-  /* Trước sau như 1 */
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
   overflow: hidden;
   border-radius: 1rem;
-}
-.card__face--front .card-content {
-  background: url("../assets/images/icon_back.png") no-repeat center center;
-  background-size: 40%;
-  height: 100%;
-  width: 100%;
+  padding: 1rem;
+  box-shadow: 0 3px 10px 3px rgba(0, 0, 0, 0.2);
 }
 
+.card__face--front .card__content {
+  background: url("../assets/images/icon_back.png") no-repeat center;
+  height: 100%;
+  width: 100%;
+  background-size: 40px 40px;
+}
 .card__face--back {
   background-color: var(--light);
   transform: rotateY(-180deg);
-}
-.card__face--back .card-content {
-  background-size: contain;
-  background-position: center center;
-  background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
 }
 </style>

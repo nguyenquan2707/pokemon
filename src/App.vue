@@ -3,17 +3,26 @@
     v-if="statusMatch === 'default'"
     @onStart="onHandleBeforeStart($event)"
   />
-  <interac-screen v-if="statusMatch === 'match'" />
+  <interac-screen
+    v-if="statusMatch === 'match'"
+    :cardsContext="this.settings.cardsContext"
+  />
 </template>
 
 <script>
 import MainScreen from "./components/MainScreen.vue";
 import InteracScreen from "./components/InteracScreen.vue";
+import { shuffled } from "./utils/arrays";
 export default {
   name: "App",
   data() {
     return {
       statusMatch: "default",
+      settings: {
+        totalOfBlocks: 0,
+        cardsContext: [],
+        startedAt: null,
+      },
     };
   },
   components: {
@@ -22,7 +31,22 @@ export default {
   },
   methods: {
     onHandleBeforeStart(event) {
-      console.log(event);
+      this.settings.totalOfBlocks = event.totalOfBlocks;
+      let firstCards = Array.from(
+        { length: this.settings.totalOfBlocks / 2 },
+        (__, i) => i + 1
+      );
+      let secondCards = Array.from(
+        { length: this.settings.totalOfBlocks / 2 },
+        (__, i) => i + 1
+      );
+
+      let cards = [...firstCards, ...secondCards];
+
+      this.settings.cardsContext = shuffled(cards);
+
+      this.settings.startedAt = new Date().getTime();
+
       this.statusMatch = "match";
     },
   },
@@ -31,7 +55,7 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

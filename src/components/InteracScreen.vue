@@ -1,5 +1,22 @@
 <template>
-  <h1>Interact component..</h1>
+  <div class="screen">
+    <card-flip v-for="(card, index) in cardsContext" :key="index" />
+  </div>
 </template>
 
-<script></script>
+<script>
+import CardFlip from "./Card.vue";
+export default {
+  props: {
+    cardsContext: {
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
+  },
+  components: {
+    CardFlip,
+  },
+};
+</script>
