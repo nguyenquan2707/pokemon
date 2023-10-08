@@ -10,13 +10,28 @@
         <div class="card__content"></div>
       </div>
       <div class="card__face card__face--back">
-        <div class="card__content">Back</div>
+        <div
+          class="card__content"
+          :style="{
+            backgroundImage: `url(${require('../assets/images/' + imageUrl)})`,
+          }"
+        ></div>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
+  props: {
+    imageUrl: {
+      type: String,
+      required: true,
+    },
+    cardValue: {
+      // String, Number, Object...
+      type: [String, Object],
+    },
+  },
   data() {
     return {
       isFlipped: false,
@@ -25,6 +40,9 @@ export default {
   methods: {
     onToggleFlipCard() {
       this.isFlipped = !this.isFlipped;
+      if (this.isFlipped) {
+        this.$emit("openCard", this.cardValue);
+      }
     },
   },
 };
@@ -70,5 +88,12 @@ export default {
 .card__face--back {
   background-color: var(--light);
   transform: rotateY(-180deg);
+}
+
+.card__face--back .card__content {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  height: 100%;
 }
 </style>
