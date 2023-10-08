@@ -5,7 +5,7 @@
       :key="index"
       :ref="`card-${index}`"
       :imageUrl="`${card}.png`"
-      :cardValue="card"
+      :cardValue="{ index, cardData: card }"
       @openCard="checkRule($event)"
     />
   </div>
@@ -37,11 +37,21 @@ export default {
       }
       this.rule.push(cardValue);
       console.log(cardValue);
-      if (this.rule.length === 2 && this.rule[0] === this.rule[1]) {
+      if (
+        this.rule.length === 2 &&
+        this.rule[0].cardData === this.rule[1].cardData
+      ) {
         console.log(`right case =`, cardValue);
-      } else if (this.rule.length === 2 && this.rule[0] !== this.rule[1]) {
+      } else if (
+        this.rule.length === 2 &&
+        this.rule[0].cardData !== this.rule[1].cardData
+      ) {
         console.log(`wrong case =`, cardValue);
-        this.rule = [];
+        setTimeout(() => {
+          // this.$refs[`card-${this.rule[0].index}`].onFlipBackCard();
+          // this.$refs[`card-${this.rule[1].index}`].onFlipBackCard();
+          this.rule = [];
+        }, 800);
       } else {
         return false;
       }

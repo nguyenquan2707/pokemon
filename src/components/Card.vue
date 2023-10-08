@@ -29,7 +29,7 @@ export default {
     },
     cardValue: {
       // String, Number, Object...
-      type: [String, Object],
+      type: [Array, String, Number, Object],
     },
   },
   data() {
@@ -43,6 +43,9 @@ export default {
       if (this.isFlipped) {
         this.$emit("openCard", this.cardValue);
       }
+    },
+    onFlipBackCard() {
+      this.isFlipped = false;
     },
   },
 };
