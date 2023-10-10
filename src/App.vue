@@ -6,6 +6,7 @@
   <interac-screen
     v-if="statusMatch === 'match'"
     :cardsContext="this.settings.cardsContext"
+    @onFinish="onGetResult()"
   />
 </template>
 
@@ -23,6 +24,7 @@ export default {
         cardsContext: [],
         startedAt: null,
       },
+      timer: 0,
     };
   },
   components: {
@@ -48,6 +50,12 @@ export default {
       this.settings.startedAt = new Date().getTime();
 
       this.statusMatch = "match";
+    },
+    onGetResult() {
+      //get time
+      this.timer = new Date().getTime - this.settings.startedAt;
+      //go to result component.
+      this.statusMatch = "result";
     },
   },
 };

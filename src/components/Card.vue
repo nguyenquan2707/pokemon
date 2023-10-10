@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="card">
+  <div class="card" :class="{ disabled: isDisabled }">
     <div
       class="card__inner"
       :class="{ 'is-flipped': isFlipped }"
@@ -35,10 +35,13 @@ export default {
   data() {
     return {
       isFlipped: false,
+      isDisabled: false,
     };
   },
   methods: {
     onToggleFlipCard() {
+      if (this.isDisabled) return false;
+
       this.isFlipped = !this.isFlipped;
       if (this.isFlipped) {
         this.$emit("openCard", this.cardValue);
@@ -46,6 +49,9 @@ export default {
     },
     onFlipBackCard() {
       this.isFlipped = false;
+    },
+    onEnabledDisableMode() {
+      this.isDisabled = true;
     },
   },
 };
@@ -67,6 +73,11 @@ export default {
   cursor: pointer;
   position: relative;
 }
+
+.card.disabled .card__inner {
+  cursor: default;
+}
+
 .card__inner.is-flipped {
   transform: rotateY(-180deg);
 }
