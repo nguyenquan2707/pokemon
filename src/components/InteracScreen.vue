@@ -73,3 +73,20 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.screen {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--dark);
+  color: var(--light);
+}
+.card__inner {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+}
+</style>

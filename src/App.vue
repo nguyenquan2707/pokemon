@@ -8,11 +8,17 @@
     :cardsContext="this.settings.cardsContext"
     @onFinish="onGetResult()"
   />
+  <result-screen
+    v-if="statusMatch === 'result'"
+    :timer="this.timer"
+    @onStartAgain="statusMatch = 'default'"
+  />
 </template>
 
 <script>
 import MainScreen from "./components/MainScreen.vue";
 import InteracScreen from "./components/InteracScreen.vue";
+import ResultScreen from "./components/Result.vue";
 import { shuffled } from "./utils/arrays";
 export default {
   name: "App",
@@ -30,6 +36,7 @@ export default {
   components: {
     MainScreen,
     InteracScreen,
+    ResultScreen,
   },
   methods: {
     onHandleBeforeStart(event) {
