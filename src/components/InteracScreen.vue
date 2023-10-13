@@ -1,13 +1,16 @@
 <template>
   <div class="screen">
-    <card-flip
-      v-for="(card, index) in cardsContext"
-      :key="index"
-      :ref="`card-${index}`"
-      :imageUrl="`${card}.png`"
-      :cardValue="{ index: index, cardData: card }"
-      @openCard="checkRule($event)"
-    />
+    <div class="screen__inner">
+      <card-flip
+        v-for="(card, index) in cardsContext"
+        :key="index"
+        :ref="`card-${index}`"
+        :imageUrl="`${card}.png`"
+        :cardValue="{ index: index, cardData: card }"
+        :cardsContext="cardsContext"
+        @openCard="checkRule($event)"
+      />
+    </div>
   </div>
 </template>
 
@@ -81,10 +84,12 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  background: var(--dark);
+  z-index: 2;
+  background-color: var(--dark);
   color: var(--light);
 }
-.card__inner {
+.screen__inner {
+  width: 424px;
   display: flex;
   flex-wrap: wrap;
   margin: 2rem auto;

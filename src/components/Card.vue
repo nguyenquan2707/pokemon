@@ -1,6 +1,15 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="card" :class="{ disabled: isDisabled }">
+  <div
+    class="card"
+    :class="{ disabled: isDisabled }"
+    :style="{
+      height: `${(920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16}px`,
+      width: `${
+        (((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4
+      }px`,
+    }"
+  >
     <div
       class="card__inner"
       :class="{ 'is-flipped': isFlipped }"
@@ -31,6 +40,12 @@ export default {
       // String, Number, Object...
       type: [Array, String, Number, Object],
     },
+    cardsContext: {
+      type: Array,
+      default: function () {
+        return [];
+      },
+    },
   },
   data() {
     return {
@@ -60,6 +75,7 @@ export default {
 <style lang="css" scoped>
 .card {
   display: inline-block;
+  /* display: flex; */
   margin-right: 1rem;
   margin-top: 1rem;
   width: 90px;
