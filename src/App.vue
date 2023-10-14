@@ -13,6 +13,7 @@
     :timer="this.timer"
     @onStartAgain="statusMatch = 'default'"
   />
+  <copy-right />
 </template>
 
 <script>
@@ -20,6 +21,7 @@ import MainScreen from "./components/MainScreen.vue";
 import InteracScreen from "./components/InteracScreen.vue";
 import ResultScreen from "./components/Result.vue";
 import { shuffled } from "./utils/arrays";
+import CopyRight from "./components/CopyRight.vue";
 export default {
   name: "App",
   data() {
@@ -37,6 +39,7 @@ export default {
     MainScreen,
     InteracScreen,
     ResultScreen,
+    CopyRight,
   },
   methods: {
     onHandleBeforeStart(event) {
@@ -59,10 +62,10 @@ export default {
       this.statusMatch = "match";
     },
     onGetResult() {
-      //get time
-      this.timer = new Date().getTime - this.settings.startedAt;
       //go to result component.
       this.statusMatch = "result";
+      //get time
+      this.timer = new Date().getTime() - this.settings.startedAt;
     },
   },
 };
