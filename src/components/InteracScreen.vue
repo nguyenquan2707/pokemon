@@ -1,6 +1,15 @@
 <template>
   <div class="screen">
-    <div class="screen__inner">
+    <div
+      class="screen__inner"
+      :style="{
+        width: `${
+          ((((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4 +
+            16) *
+          Math.sqrt(cardsContext.length)
+        }px`,
+      }"
+    >
       <card-flip
         v-for="(card, index) in cardsContext"
         :key="index"

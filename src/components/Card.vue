@@ -8,6 +8,9 @@
       width: `${
         (((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4
       }px`,
+      perspective: `${
+        ((((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) / 4) * 2
+      }px`,
     }"
   >
     <div
@@ -16,7 +19,16 @@
       @click="onToggleFlipCard"
     >
       <div class="card__face card__face--front">
-        <div class="card__content"></div>
+        <div
+          class="card__content"
+          :style="{
+            backgroundSize: `${
+              (((920 - 16 * 4) / Math.sqrt(cardsContext.length) - 16) * 3) /
+              4 /
+              3
+            }px`,
+          }"
+        ></div>
       </div>
       <div class="card__face card__face--back">
         <div
@@ -80,6 +92,7 @@ export default {
   margin-top: 1rem;
   width: 90px;
   height: 120px;
+  /* perspective: 100px; */
 }
 .card__inner {
   width: 100%;
@@ -113,7 +126,7 @@ export default {
   background: url("../assets/images/icon_back.png") no-repeat center;
   height: 100%;
   width: 100%;
-  background-size: 40px 40px;
+  /* background-size: 40px 40px; */
 }
 .card__face--back {
   background-color: var(--light);
