@@ -22,3 +22,5 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+site: https://iridescent-gumdrop-c54472.netlify.app/
